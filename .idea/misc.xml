@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/bg_bottom_sheets_main.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/bg_bottom_sheets_swiper_main.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_flag.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_menu.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_settings.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_sun.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_sunrise.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_sunset.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_thermostat.xml" value="0.352" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/drawable/ic_water_drop.xml" value="0.1" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/layout/activity_initial.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/layout/activity_main.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/layout/item_daily_main.xml" value="0.33" />
+        <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/layout/item_hourly_main.xml" value="0.2515625" />
         <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1925" />
         <entry key="..\:/Users/Nirwash/AndroidStudioProjects/MyWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1925" />
       </map>
