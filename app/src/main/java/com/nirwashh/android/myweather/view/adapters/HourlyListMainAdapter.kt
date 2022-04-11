@@ -2,8 +2,6 @@ package com.nirwashh.android.myweather.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.nirwashh.android.myweather.R
 import com.nirwashh.android.myweather.business.model.HourlyWeatherModel
 import com.nirwashh.android.myweather.databinding.ItemHourlyMainBinding

@@ -2,11 +2,9 @@ package com.nirwashh.android.myweather.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.nirwashh.android.myweather.R
 import com.nirwashh.android.myweather.business.model.DailyWeatherModel
 import com.nirwashh.android.myweather.databinding.ItemDailyMainBinding
-import com.nirwashh.android.myweather.databinding.ItemHourlyMainBinding
 
 class DailyListMainAdapter : BaseAdapter<DailyWeatherModel>() {
 
