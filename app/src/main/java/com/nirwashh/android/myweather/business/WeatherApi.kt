@@ -1,5 +1,8 @@
 package com.nirwashh.android.myweather.business
 
+import com.nirwashh.android.myweather.business.model.Weather
+import com.nirwashh.android.myweather.business.model.WeatherDataModel
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +15,5 @@ interface WeatherApi {
         @Query("exclude") exclude: String = "minutely,alerts",
         @Query("appid") appid: String = "00cdc0ee3924708d349131ddb0350450",
         @Query("lang") lang: String = "en"
-    ) // TODO указать возвращаемый тип, как обсервер
+    ) : Observable<WeatherDataModel>
 }

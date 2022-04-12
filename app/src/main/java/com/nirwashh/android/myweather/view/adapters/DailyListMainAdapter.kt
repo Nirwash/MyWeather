@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import com.nirwashh.android.myweather.R
 import com.nirwashh.android.myweather.business.model.DailyWeatherModel
 import com.nirwashh.android.myweather.databinding.ItemDailyMainBinding
+import com.nirwashh.android.myweather.view.*
+import java.lang.StringBuilder
 
 class DailyListMainAdapter : BaseAdapter<DailyWeatherModel>() {
 
@@ -18,13 +20,16 @@ class DailyListMainAdapter : BaseAdapter<DailyWeatherModel>() {
     inner class DailyViewHolder(binding: ItemDailyMainBinding) : BaseViewHolder(binding.root) {
 
         override fun bindView(position: Int) {
-            binding.apply {
-                itemTvDailyDate.text = "25 Saturday"
-                itemTvDailyPop.text = "15%"
-                itemTvDailyMinTemp.text = "11\u00b0"
-                itemTvDailyMaxTemp.text = "25\u00b0"
-                itemIcDailyWeatherCondition.setImageResource(R.drawable.ic_sun)
+            mData[position].apply {
+                binding.apply {
+                    itemTvDailyDate.text = dt.toDateFormatOf(DAY_WEEK_NAME_LONG)
+                    itemTvDailyPop.text = pop.toPercentString("%")
+                    itemTvDailyMinTemp.text = StringBuilder().append(temp.min.toDegree()).append("\u00b0").toString()
+                    itemTvDailyMaxTemp.text = StringBuilder().append(temp.max.toDegree()).append("\u00b0").toString()
+                    itemIcDailyWeatherCondition.setImageResource(weather[0].icon.provideIcon())
+                }
             }
+
 
         }
     }
