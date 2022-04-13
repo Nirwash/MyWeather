@@ -23,7 +23,7 @@
             android:layout_marginStart="8dp">
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -73,7 +73,7 @@
             android:backgroundTint="@android:color/transparent"
             android:checkable="true"
             app:icon="@drawable/city_item_favorite_selector"
-            app:iconSize="38dp"/>
+            app:iconSize="30dp"/>
 
     </FrameLayout>
 

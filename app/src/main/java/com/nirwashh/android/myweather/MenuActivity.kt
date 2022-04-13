@@ -1,27 +1,28 @@
 package com.nirwashh.android.myweather
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.view.menu.MenuPresenter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nirwashh.android.myweather.business.model.GeoCodeModel
+import com.nirwashh.android.myweather.presenters.MenuPresenter
+import com.nirwashh.android.myweather.view.MenuView
 import com.nirwashh.android.myweather.databinding.ActivityMenuBinding
 import com.nirwashh.android.myweather.view.adapters.CityListAdapter
 import com.nirwashh.android.myweather.view.createObservable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_menu.*
 import moxy.MvpAppCompatActivity
-import java.util.concurrent.TimeUnit
 import moxy.ktx.moxyPresenter
+import java.util.concurrent.TimeUnit
 
 
-class MenuActivity : MvpAppCompatActivity(), com.nirwashh.android.myweather.view.MenuView {
+
+
+class MenuActivity : MvpAppCompatActivity(), MenuView {
     lateinit var binding: ActivityMenuBinding
 
-    private val presenter by moxyPresenter { com.nirwashh.android.myweather.presenters.MenuPresenter() }
+    private val presenter by moxyPresenter { MenuPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +30,18 @@ class MenuActivity : MvpAppCompatActivity(), com.nirwashh.android.myweather.view
         setContentView(binding.root)
 
         presenter.enable()
-        presenter.getFavoriteLocation()
+        presenter.getFavoriteList()
 
-        initCitiList(predictions)
-        initCitiList(favorites)
+        initCitiList(binding.predictions)
+        initCitiList(binding.favorites)
 
-        search_field.createObservable()
+        binding.searchField.createObservable()
             .doOnNext { setLoading(true) }
             .debounce(700, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                if (!it.isNullOrEmpty()) presenter.searchFor(it)
+                //TODO
+            if (!it.isNullOrEmpty()) presenter.searchFor(it)
             }
 
     }
@@ -87,16 +89,16 @@ class MenuActivity : MvpAppCompatActivity(), com.nirwashh.android.myweather.view
     }
 
     override fun setLoading(flag: Boolean) {
-        loading.isActivated = true
-        loading.visibility = if (flag) View.VISIBLE else View.GONE
+        binding.loading.isActivated = true
+        binding.loading.visibility = if (flag) View.VISIBLE else View.GONE
 
     }
 
     override fun fillPredictionList(data: List<GeoCodeModel>) {
-        (predictions.adapter as CityListAdapter).updateData(data)
+        (binding.predictions.adapter as CityListAdapter).updateData(data)
     }
 
     override fun fillFavoriteList(data: List<GeoCodeModel>) {
-        (favorites.adapter as CityListAdapter).updateData(data)
+        (binding.favorites.adapter as CityListAdapter).updateData(data)
     }
 }

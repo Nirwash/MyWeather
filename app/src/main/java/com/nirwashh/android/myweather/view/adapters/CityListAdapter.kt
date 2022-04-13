@@ -10,7 +10,7 @@ import com.nirwashh.android.myweather.business.model.GeoCodeModel
 import com.nirwashh.android.myweather.databinding.ActivityMenuBinding
 import com.nirwashh.android.myweather.databinding.ItemCityListsBinding
 
-class CityListAdapter() : BaseAdapter<GeoCodeModel>() {
+class CityListAdapter : BaseAdapter<GeoCodeModel>() {
 
     lateinit var clickListener: SearchItemClickListener
     lateinit var binding: ItemCityListsBinding
@@ -28,25 +28,32 @@ class CityListAdapter() : BaseAdapter<GeoCodeModel>() {
 
     inner class CitySearchViewHolder(binding: ItemCityListsBinding) : BaseViewHolder(binding.root) {
         override fun bindView(position: Int) {
-            binding.apply {
-                location.setOnClickListener {
+                binding.location.setOnClickListener {
                     clickListener.showWeatherIn(mData[position])
                 }
 
-                btnFavorite.setOnClickListener {
+                binding.btnFavorite.setOnClickListener {
                     val item = mData[position]
                     when ((it as MaterialButton).isChecked) {
-                        true ->
+                        true -> {
+                            item.isFavorite = true
                             clickListener.addToFavorite(item)
-                        false ->
+                        }
+                        false -> {
+                            item.isFavorite = false
                             clickListener.removeFromFavorite(item)
+                        }
+
                     }
                 }
 
-            }
+
 
             mData[position].apply {
-                binding.state.text = if (!state.isNullOrEmpty()) itemView.context.getString(R.string.comma, state) else ""
+                binding.state.text = if (!state.isNullOrEmpty()) itemView.context.getString(
+                    R.string.comma,
+                    state
+                ) else ""
                 binding.searchCity.text = local_names.ru
                 binding.searchCountry.text = country
                 binding.btnFavorite.isChecked = isFavorite

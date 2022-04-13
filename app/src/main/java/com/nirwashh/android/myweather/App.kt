@@ -19,7 +19,7 @@ class App : Application() {
         super.onCreate()
 
         db = Room.databaseBuilder(this, OpenWeatherDatabase::class.java, "OpenWeatherDB")
-            .fallbackToDestructiveMigration().build()
+            .build()
         val preferences = getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
         val flag = preferences.contains(IS_STARTED_UP)

@@ -13,16 +13,16 @@ class MenuPresenter : BasePresenter<MenuView>() {
         repo.dataEmitter.subscribe {
             viewState.setLoading(false)
             if (it.purpose == SAVED) {
-                Log.d("Tag", "enable: SAVED ${it.data}")
+                Log.d("123321", "enable: SAVED ${it.data}")
                 viewState.fillFavoriteList(it.data)
             } else {
-                Log.d("Tag", "enable: CURRENT ${it.data}")
+                Log.d("123321", "enable: CURRENT ${it.data}")
             }
         }
     }
 
-    fun searchFor(string: String) {
-        repo.getCities(string)
+    fun searchFor(str: String) {
+        repo.getCities(str)
     }
 
     fun removeLocation(data: GeoCodeModel) {
@@ -33,7 +33,7 @@ class MenuPresenter : BasePresenter<MenuView>() {
         repo.add(data)
     }
 
-    fun getFavoriteLocation() {
+    fun getFavoriteList() {
         repo.updateFavorite()
     }
 }

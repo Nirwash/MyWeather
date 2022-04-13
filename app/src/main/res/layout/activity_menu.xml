@@ -38,7 +38,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
-            android:id="@+id/prediction_container"
+            android:id="@+id/predictions_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@drawable/bg_menu_favorites_list"
-            app:layout_constraintTop_toBottomOf="@id/prediction_container"
+            app:layout_constraintTop_toBottomOf="@id/predictions_container"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,11 +22,11 @@ class MainRepository(api: ApiProvider) : BaseRepository<MainRepository.ServerRes
                 it.asSequence()
                     .map { model -> model.name }
                     .toList()
-                    // TODO настроить локализацию проекта
                     .filterNotNull()
                     .first()
-            }
-        ) { weatherData, geoCode -> ServerResponse(geoCode, weatherData) }
+            },
+            { weatherData, geoCode -> ServerResponse(geoCode, weatherData) }
+        )
             .subscribeOn(Schedulers.io())
             .doOnNext {
                 dbAccess.insertWeatherData(
