@@ -2,15 +2,24 @@ package com.nirwashh.android.myweather
 
 import android.app.Application
 import android.content.Intent
+import androidx.room.ProvidedAutoMigrationSpec
+import androidx.room.Room
+import com.nirwashh.android.myweather.business.room.OpenWeatherDatabase
 
 const val APP_SETTINGS = "App settings"
 const val IS_STARTED_UP = "Is started app"
 
 class App : Application() {
 
+    companion object {
+        lateinit var db: OpenWeatherDatabase
+    }
+
     override fun onCreate() {
         super.onCreate()
 
+        db = Room.databaseBuilder(this, OpenWeatherDatabase::class.java, "OpenWeatherDB")
+            .fallbackToDestructiveMigration().build()
         val preferences = getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
         val flag = preferences.contains(IS_STARTED_UP)
