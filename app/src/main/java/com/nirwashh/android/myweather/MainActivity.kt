@@ -1,10 +1,12 @@
 package com.nirwashh.android.myweather
 
 import android.annotation.SuppressLint
+import android.content.Intent
 
 import android.location.Location
 
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationCallback
@@ -24,6 +26,7 @@ import moxy.ktx.moxyPresenter
 import java.lang.StringBuilder
 
 const val TAG = "GEO_TEST"
+const val COORDINATES = "Coordinates"
 
 class MainActivity : MvpAppCompatActivity(), MainView {
     lateinit var binding: ActivityMainBinding
@@ -40,6 +43,25 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+        if (!intent.hasExtra(COORDINATES)) {
+            geoService.requestLocationUpdates(locationRequest, geoCallback, mainLooper)
+        } else {
+            val coord = intent.extras!!.getBundle(COORDINATES)!!
+            val loc = Location("")
+            loc.latitude = coord.getString("lat")!!.toDouble()
+            loc.longitude = coord.getString("lon")!!.toDouble()
+            mLocation = loc
+            mainPresenter.refresh(
+                lat = mLocation.latitude.toString(),
+                lon = mLocation.longitude.toString()
+            )
+        }
+
+        binding.btnMenuMainAct.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, android.R.anim.fade_out)
+        }
 
         binding.hourlyListMain.apply {
             adapter = HourlyListMainAdapter()
@@ -54,7 +76,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         mainPresenter.enable()
 
-        geoService.requestLocationUpdates(locationRequest, geoCallback, mainLooper)
+
     }
 
     private fun initViews() {
@@ -82,23 +104,32 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun displayCurrentData(data: WeatherDataModel) {
-        data.apply {  binding.apply {
-            tvDateMainAct.text = current.dt.toDateFormatOf(DAY_FULL_MONTH_NAME)
-            icWeatherConditionMain.setImageResource(current.weather[0].icon.provideIcon())
-            tvWeatherConditionDescriptionMain.text = current.weather[0].description
-            tvTempMainAct.text = StringBuilder().append(current.temp.toDegree()).append("\u00b0").toString()
-            daily[0].temp.apply {
-                tvMinValueMainAct.text = StringBuilder().append(min.toDegree()).append("\u00b0").toString()
-                tvMaxValueMainAct.text = StringBuilder().append(max.toDegree()).append("\u00b0").toString()
-                tvAvgValueMainAct.text = StringBuilder().append(eve.toDegree()).append("\u00b0").toString()
+        data.apply {
+            binding.apply {
+                tvDateMainAct.text = current.dt.toDateFormatOf(DAY_FULL_MONTH_NAME)
+                icWeatherConditionMain.setImageResource(current.weather[0].icon.provideIcon())
+                tvWeatherConditionDescriptionMain.text = current.weather[0].description
+                tvTempMainAct.text =
+                    StringBuilder().append(current.temp.toDegree()).append("\u00b0").toString()
+                daily[0].temp.apply {
+                    tvMinValueMainAct.text =
+                        StringBuilder().append(min.toDegree()).append("\u00b0").toString()
+                    tvMaxValueMainAct.text =
+                        StringBuilder().append(max.toDegree()).append("\u00b0").toString()
+                    tvAvgValueMainAct.text =
+                        StringBuilder().append(eve.toDegree()).append("\u00b0").toString()
+                }
+                imgWeatherMainAct.setImageResource(R.mipmap.cloud3x)
+                tvPressureMuMain.text =
+                    StringBuilder().append(current.pressure.toString()).append(" hPa").toString()
+                tvHumidityMuMain.text =
+                    StringBuilder().append(current.humidity.toString()).append(" %").toString()
+                tvWindSpeedMuMain.text =
+                    StringBuilder().append(current.wind_speed.toString()).append(" m/s").toString()
+                tvSunriseTimeMain.text = current.sunrise.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
+                tvSunsetTimeMain.text = current.sunset.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
             }
-            imgWeatherMainAct.setImageResource(R.mipmap.cloud3x)
-            tvPressureMuMain.text = StringBuilder().append(current.pressure.toString()).append(" hPa").toString()
-            tvHumidityMuMain.text = StringBuilder().append(current.humidity.toString()).append(" %").toString()
-            tvWindSpeedMuMain.text = StringBuilder().append(current.wind_speed.toString()).append(" m/s").toString()
-            tvSunriseTimeMain.text = current.sunrise.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
-            tvSunsetTimeMain.text = current.sunset.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
-        }}
+        }
 
     }
 

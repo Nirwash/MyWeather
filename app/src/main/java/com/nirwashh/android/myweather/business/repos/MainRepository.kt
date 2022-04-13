@@ -15,7 +15,7 @@ class MainRepository(api: ApiProvider) : BaseRepository<MainRepository.ServerRes
     private val gson = Gson()
     private val dbAccess = db.getWeatherDao()
 
-    fun repoadData(lat: String, lon: String) {
+    fun reloadData(lat: String, lon: String) {
         Observable.zip(
             api.provideWeatherApi().getWeatherForecast(lat, lon),
             api.provideGeoCodeApi().getCityByCoord(lat, lon).map {
@@ -58,5 +58,5 @@ class MainRepository(api: ApiProvider) : BaseRepository<MainRepository.ServerRes
         val cityName: String,
         val weatherData: WeatherDataModel,
         val error: Throwable? = null
-    ) {}
+    )
 }

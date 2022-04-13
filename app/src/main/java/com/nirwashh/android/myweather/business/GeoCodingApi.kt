@@ -7,6 +7,13 @@ import retrofit2.http.Query
 
 interface GeoCodingApi {
 
+    @GET("geo/1.0/direct")
+    fun getCityByName(
+        @Query ("q") name: String,
+        @Query ("limit") limit: String = "10",
+        @Query ("appid") appid: String = "00cdc0ee3924708d349131ddb0350450"
+    ) : Observable<List<GeoCodeModel>>
+
     @GET("geo/1.0/reverse?")
     fun getCityByCoord(
         @Query("lat") lat: String,
@@ -14,4 +21,6 @@ interface GeoCodingApi {
         @Query("limit") limit: String = "10",
         @Query("appid") appid: String = "00cdc0ee3924708d349131ddb0350450"
     ) : Observable<List<GeoCodeModel>>
+
+
 }

@@ -23,7 +23,7 @@ class MainPresenter: BasePresenter<MainView>() {
 
     fun refresh(lat: String, lon: String) {
         viewState.setLoading(true)
-        repo.repoadData(lat, lon)
+        repo.reloadData(lat, lon)
 
     }
 }
