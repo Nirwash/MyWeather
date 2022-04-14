@@ -14,11 +14,11 @@ fun GeoCodeModel.mapToEntity() = GeoCodeEntity(
 )
 
 fun GeoCodeEntity.mapToModel() = GeoCodeModel(
-    this.country,
-    this.lat,
-    this.local_name,
-    this.lon,
     this.name,
+    local_names,
+    this.lat,
+    this.lon,
+    this.country,
     this.state,
     this.isFavorite
 )
