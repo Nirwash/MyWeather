@@ -6,7 +6,6 @@ import android.content.Intent
 import android.location.Location
 
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationCallback
@@ -29,7 +28,7 @@ const val TAG = "GEO_TEST"
 const val COORDINATES = "Coordinates"
 
 class MainActivity : MvpAppCompatActivity(), MainView {
-    lateinit var binding: ActivityMainBinding
+    lateinit var b: ActivityMainBinding
 
     private val mainPresenter by moxyPresenter { MainPresenter() }
 
@@ -40,8 +39,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        b = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(b.root)
         initViews()
         if (!intent.hasExtra(COORDINATES)) {
             geoService.requestLocationUpdates(locationRequest, geoCallback, mainLooper)
@@ -57,18 +56,24 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             )
         }
 
-        binding.btnMenuMainAct.setOnClickListener {
+        b.btnMenuMainAct.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, android.R.anim.fade_out)
         }
 
-        binding.hourlyListMain.apply {
+        b.btnSettingsMainAct.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, android.R.anim.fade_out)
+        }
+
+        b.hourlyListMain.apply {
             adapter = HourlyListMainAdapter()
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
-        binding.dailyListMain.apply {
+        b.dailyListMain.apply {
             adapter = DailyListMainAdapter()
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
@@ -80,7 +85,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     private fun initViews() {
-        binding.apply {
+        b.apply {
             tvCityMainAct.text = "Rostov-od-Don"
             tvDateMainAct.text = "31 Oktober"
             icWeatherConditionMain.setImageResource(R.drawable.ic_sun)
@@ -100,12 +105,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     //---moxy-code---
     override fun displayLocation(data: String) {
-        binding.tvCityMainAct.text = data
+        b.tvCityMainAct.text = data
     }
 
     override fun displayCurrentData(data: WeatherDataModel) {
         data.apply {
-            binding.apply {
+            b.apply {
                 tvDateMainAct.text = current.dt.toDateFormatOf(DAY_FULL_MONTH_NAME)
                 icWeatherConditionMain.setImageResource(current.weather[0].icon.provideIcon())
                 tvWeatherConditionDescriptionMain.text = current.weather[0].description
