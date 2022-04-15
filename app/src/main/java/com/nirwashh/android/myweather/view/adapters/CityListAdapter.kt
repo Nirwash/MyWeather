@@ -1,23 +1,21 @@
 package com.nirwashh.android.myweather.view.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.nirwashh.android.myweather.R
 import com.nirwashh.android.myweather.business.model.GeoCodeModel
-import com.nirwashh.android.myweather.databinding.ActivityMenuBinding
 import com.nirwashh.android.myweather.databinding.ItemCityListsBinding
+import java.util.*
 
 class CityListAdapter : BaseAdapter<GeoCodeModel>() {
 
     lateinit var clickListener: SearchItemClickListener
-    lateinit var binding: ItemCityListsBinding
+    lateinit var b: ItemCityListsBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CitySearchViewHolder {
-        binding = ItemCityListsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CitySearchViewHolder(binding)
+        b = ItemCityListsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CitySearchViewHolder(b)
     }
 
     interface SearchItemClickListener {
@@ -28,11 +26,11 @@ class CityListAdapter : BaseAdapter<GeoCodeModel>() {
 
     inner class CitySearchViewHolder(binding: ItemCityListsBinding) : BaseViewHolder(binding.root) {
         override fun bindView(position: Int) {
-                binding.location.setOnClickListener {
+                b.location.setOnClickListener {
                     clickListener.showWeatherIn(mData[position])
                 }
 
-                binding.btnFavorite.setOnClickListener {
+                b.favorite.setOnClickListener {
                     val item = mData[position]
                     when ((it as MaterialButton).isChecked) {
                         true -> {
@@ -50,13 +48,17 @@ class CityListAdapter : BaseAdapter<GeoCodeModel>() {
 
 
             mData[position].apply {
-                binding.state.text = if (!state.isNullOrEmpty()) itemView.context.getString(
+                b.state.text = if (!state.isNullOrEmpty()) itemView.context.getString(
                     R.string.comma,
                     state
                 ) else ""
-                binding.searchCity.text = local_names.ru
-                binding.searchCountry.text = country
-                binding.btnFavorite.isChecked = isFavorite
+                b.searchCity.text = when (Locale.getDefault().displayLanguage) {
+                    "русский" -> local_names.ru ?: name
+                    "english" -> local_names.en ?: name
+                    else -> name
+                }
+                b.searchCountry.text = Locale("", country).displayName
+                b.favorite.isChecked = isFavorite
 
             }
 

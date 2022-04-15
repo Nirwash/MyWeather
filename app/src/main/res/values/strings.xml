@@ -4,23 +4,23 @@
     <string name="max">max</string>
     <string name="avg">avg</string>
     <string name="location">Location</string>
-    <string name="comma">, %1$s</string>
+    <string name="comma" translatable="false">, %1$s</string>
     <string name="temperature">Temperature</string>
     <string name="wind_speed">Wind speed</string>
     <string name="pressure">Pressure</string>
     <string name="wind_speed_mu_ms">%1$s m/s</string>
     <string name="wind_speed_mu_kmh">%1$s km/h</string>
-    <string name="pressure_mu_hpa">hPa</string>
-    <string name="pressure_mu_mmHg">mmHg</string>
-    <string name="provided_by">Provided by</string>
-    <string name="provider_description">All data provided by Open Weather \nMap using One Call API</string>
-    <string name="source_provider">Source provider</string>
+    <string name="pressure_mu_hpa">%1$s hPa</string>
+    <string name="pressure_mu_mmHg">%1$s mmHg</string>
+    <string name="provided_by" translatable="false">Provided by</string>
+    <string name="provider_description" translatable="false">All data provided by Open Weather \nMap using One Call API</string>
+    <string name="source_provider" translatable="false">Source provider</string>
 
     <string name="c" translatable="false">\u00B0C</string>
     <string name="f" translatable="false">\u00B0F</string>
-    <string name="m_s" translatable="false">m/s</string>
-    <string name="km_h" translatable="false">km/h</string>
-    <string name="mmhg" translatable="false">mmHg</string>
-    <string name="hpa" translatable="false">hPa</string>
+    <string name="m_s">m/s</string>
+    <string name="km_h">km/h</string>
+    <string name="mmhg">mmHg</string>
+    <string name="hpa">hPa</string>
 
 </resources>

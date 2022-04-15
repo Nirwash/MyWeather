@@ -108,6 +108,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         b.tvCityMainAct.text = data
     }
 
+    @SuppressLint("ResourceType")
     override fun displayCurrentData(data: WeatherDataModel) {
         data.apply {
             b.apply {
@@ -124,6 +125,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                     tvAvgValueMainAct.text =
                         StringBuilder().append(eve.toDegree()).append("\u00b0").toString()
                 }
+
+                val pressureSet = SettingsHolder.pressure
+                b.tvPressureMuMain.text = getString(pressureSet.measureUnitStringRes, pressureSet.getValue(current.pressure.toDouble()))
+
+                val windSpeedSet = SettingsHolder.windSpeed
+                b.tvWindSpeedMuMain.text = getString(pressureSet.measureUnitStringRes, pressureSet.getValue(current.wind_speed))
+
                 imgWeatherMainAct.setImageResource(R.mipmap.cloud3x)
                 tvPressureMuMain.text =
                     StringBuilder().append(current.pressure.toString()).append(" hPa").toString()

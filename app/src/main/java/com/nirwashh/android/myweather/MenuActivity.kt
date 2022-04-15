@@ -12,6 +12,7 @@ import com.nirwashh.android.myweather.databinding.ActivityMenuBinding
 import com.nirwashh.android.myweather.view.adapters.CityListAdapter
 import com.nirwashh.android.myweather.view.createObservable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_menu.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.TimeUnit
@@ -20,28 +21,27 @@ import java.util.concurrent.TimeUnit
 
 
 class MenuActivity : MvpAppCompatActivity(), MenuView {
-    lateinit var binding: ActivityMenuBinding
+    lateinit var b: ActivityMenuBinding
 
-    private val presenter by moxyPresenter { MenuPresenter() }
+    //private val presenter by moxyPresenter { MenuPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        b = ActivityMenuBinding.inflate(layoutInflater)
+        setContentView(b.root)
 
-        presenter.enable()
-        presenter.getFavoriteList()
+        //presenter.enable()
+        //presenter.getFavoriteList()
 
-        initCitiList(binding.predictions)
-        initCitiList(binding.favorites)
+        initCitiList(predictions)
+        initCitiList(favorites)
 
-        binding.searchField.createObservable()
+        b.searchField.createObservable()
             .doOnNext { setLoading(true) }
             .debounce(700, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                //TODO
-            if (!it.isNullOrEmpty()) presenter.searchFor(it)
+            //if (!it.isNullOrEmpty()) presenter.searchFor(it)
             }
 
     }
@@ -69,11 +69,11 @@ class MenuActivity : MvpAppCompatActivity(), MenuView {
 
     private val searchItemClickListener = object : CityListAdapter.SearchItemClickListener {
         override fun removeFromFavorite(item: GeoCodeModel) {
-            presenter.removeLocation(item)
+            //presenter.removeLocation(item)
         }
 
         override fun addToFavorite(item: GeoCodeModel) {
-            presenter.saveLocation(item)
+            //presenter.saveLocation(item)
         }
 
         override fun showWeatherIn(item: GeoCodeModel) {
@@ -89,16 +89,16 @@ class MenuActivity : MvpAppCompatActivity(), MenuView {
     }
 
     override fun setLoading(flag: Boolean) {
-        binding.loading.isActivated = true
-        binding.loading.visibility = if (flag) View.VISIBLE else View.GONE
+        b.loading.isActivated = true
+        b.loading.visibility = if (flag) View.VISIBLE else View.GONE
 
     }
 
     override fun fillPredictionList(data: List<GeoCodeModel>) {
-        (binding.predictions.adapter as CityListAdapter).updateData(data)
+        (predictions.adapter as CityListAdapter).updateData(data)
     }
 
     override fun fillFavoriteList(data: List<GeoCodeModel>) {
-        (binding.favorites.adapter as CityListAdapter).updateData(data)
+        (favorites.adapter as CityListAdapter).updateData(data)
     }
 }

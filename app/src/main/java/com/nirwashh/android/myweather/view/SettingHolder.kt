@@ -50,7 +50,7 @@ object SettingsHolder {
     const val MM_HG = 5
     const val HPA = 6
 
-    enum class Setting(@IdRes val checkedViewId: Int, @IdRes val mesureUnitStringRes: Int, val prefConst: Int ) {
+    enum class Setting(@IdRes val checkedViewId: Int, @IdRes val measureUnitStringRes: Int, val prefConst: Int ) {
         TEMP_CELSIUS(R.id.btn_degreeC, R.string.c, C) {
             override fun getValue(initValue: Double) = valueToString { initValue - 273.15 }
         },

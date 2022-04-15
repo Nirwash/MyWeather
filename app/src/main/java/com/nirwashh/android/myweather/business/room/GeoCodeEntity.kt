@@ -5,7 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import com.nirwashh.android.myweather.business.model.LocalNames
 
-@Entity(tableName = "GeoCode", primaryKeys = ["lat", "lon"])
+@Entity(tableName = "GeoCode", primaryKeys = ["lat","lon"])
 class GeoCodeEntity (
     @ColumnInfo (name = "country") val country: String,
     @Embedded val local_names: LocalNames,

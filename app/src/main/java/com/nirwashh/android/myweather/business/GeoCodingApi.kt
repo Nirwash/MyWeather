@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface GeoCodingApi {
 
-    @GET("geo/1.0/direct")
+    @GET("geo/1.0/direct?")
     fun getCityByName(
         @Query ("q") name: String,
         @Query ("limit") limit: String = "10",

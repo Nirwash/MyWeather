@@ -19,7 +19,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //TODO убрать fallBackToDestructiveMigration() к релизу
         db = Room.databaseBuilder(this, OpenWeatherDatabase::class.java, "OpenWeatherDB")
             .fallbackToDestructiveMigration()
             .build()

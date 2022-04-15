@@ -2,7 +2,6 @@ package com.nirwashh.android.myweather.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.nirwashh.android.myweather.R
 import com.nirwashh.android.myweather.business.model.DailyWeatherModel
 import com.nirwashh.android.myweather.databinding.ItemDailyMainBinding
 import com.nirwashh.android.myweather.view.*
@@ -10,18 +9,18 @@ import java.lang.StringBuilder
 
 class DailyListMainAdapter : BaseAdapter<DailyWeatherModel>() {
 
-    lateinit var binding: ItemDailyMainBinding
+    lateinit var b: ItemDailyMainBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder {
-        binding = ItemDailyMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DailyViewHolder(binding)
+        b = ItemDailyMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DailyViewHolder(b)
     }
 
     inner class DailyViewHolder(binding: ItemDailyMainBinding) : BaseViewHolder(binding.root) {
 
         override fun bindView(position: Int) {
             mData[position].apply {
-                binding.apply {
+                b.apply {
                     itemTvDailyDate.text = dt.toDateFormatOf(DAY_WEEK_NAME_LONG)
                     itemTvDailyPop.text = pop.toPercentString("%")
                     itemTvDailyMinTemp.text = StringBuilder().append(temp.min.toDegree()).append("\u00b0").toString()
