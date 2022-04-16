@@ -2,12 +2,14 @@ package com.nirwashh.android.myweather
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Point
 
 import android.location.Location
 
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import java.lang.StringBuilder
+import kotlin.math.roundToInt
 
 const val TAG = "GEO_TEST"
 const val COORDINATES = "Coordinates"
@@ -42,7 +45,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         b = ActivityMainBinding.inflate(layoutInflater)
         setContentView(b.root)
+
+        initBottomSheets()
         initViews()
+        initSwipeRefresh()
+
+        refresh.isRefreshing = true
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, DailyListFragment(), DailyListFragment::class.simpleName)
+            .commit()
+
         if (!intent.hasExtra(COORDINATES)) {
             geoService.requestLocationUpdates(locationRequest, geoCallback, Looper.getMainLooper())
         } else {
@@ -72,11 +85,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         b.hourlyListMain.apply {
             adapter = HourlyListMainAdapter()
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-        }
-        b.dailyListMain.apply {
-            adapter = DailyListMainAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }
 
@@ -128,10 +136,16 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 }
 
                 val pressureSet = SettingsHolder.pressure
-                b.tvPressureMuMain.text = getString(pressureSet.measureUnitStringRes, pressureSet.getValue(current.pressure.toDouble()))
+                b.tvPressureMuMain.text = getString(
+                    pressureSet.measureUnitStringRes,
+                    pressureSet.getValue(current.pressure.toDouble())
+                )
 
                 val windSpeedSet = SettingsHolder.windSpeed
-                b.tvWindSpeedMuMain.text = getString(pressureSet.measureUnitStringRes, pressureSet.getValue(current.wind_speed))
+                b.tvWindSpeedMuMain.text = getString(
+                    pressureSet.measureUnitStringRes,
+                    pressureSet.getValue(current.wind_speed)
+                )
 
                 imgWeatherMainAct.setImageResource(current.weather[0].icon.provideImage())
                 tvPressureMuMain.text =
@@ -152,7 +166,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun displayDailyData(data: List<DailyWeatherModel>) {
-        (daily_list_main.adapter as DailyListMainAdapter).updateData(data)
+        (supportFragmentManager.findFragmentByTag(DailyListFragment::class.simpleName) as DailyListFragment).setData(
+            data
+        )
     }
 
     override fun displayError(error: Throwable) {
@@ -160,6 +176,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun setLoading(flag: Boolean) {
+        refresh.isRefreshing = flag
 
     }
     //---moxy-code---
@@ -188,4 +205,24 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
     }
+
+    private fun initBottomSheets() {
+        bottom_sheets_main.isNestedScrollingEnabled = true
+        val size = Point()
+        windowManager.defaultDisplay.getSize(size)
+        bottom_sheets_container_main.layoutParams =
+            CoordinatorLayout.LayoutParams(size.x, (size.y * 0.55).roundToInt())
+    }
+
+    private fun initSwipeRefresh() {
+        refresh.apply {
+            setColorSchemeResources(R.color.purple_700)
+            setProgressViewEndTarget(false, 280)
+            setOnRefreshListener {
+                mainPresenter.refresh(mLocation.latitude.toString(), mLocation.longitude.toString())
+
+            }
+        }
+    }
+
 }

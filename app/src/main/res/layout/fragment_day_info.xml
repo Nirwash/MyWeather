@@ -17,7 +17,7 @@
             android:id="@+id/topic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
+            android:layout_margin="8dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="32dp">
 
@@ -64,7 +64,7 @@
             android:layout_height="1dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@color/divider_color"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/topic"/>
@@ -73,7 +73,7 @@
             android:id="@+id/temp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="@id/first_divider"
             tools:layout_editor_absoluteX="32dp">
@@ -83,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginStart="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -93,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:includeFontPadding="false"
+                    android:textSize="16sp"
                     android:text="@string/temperature" />
 
                 <LinearLayout
@@ -107,6 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:textSize="16sp"
                     android:includeFontPadding="false"
                     android:text="@string/feels_like" />
 
@@ -116,8 +119,8 @@
                 android:id="@+id/temp_mon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/temp_day"
@@ -129,7 +132,8 @@
                     style="@style/mainTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="mon"
+                    android:text="@string/morn"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -138,6 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
                 <LinearLayout
@@ -153,6 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
             </LinearLayout>
@@ -161,8 +167,8 @@
                 android:id="@+id/temp_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/temp_eve"
@@ -174,7 +180,8 @@
                     style="@style/mainTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="day"
+                    android:text="@string/day"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -183,6 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
                 <LinearLayout
@@ -198,6 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
             </LinearLayout>
@@ -206,8 +215,8 @@
                 android:id="@+id/temp_eve"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/temp_night"
@@ -219,7 +228,8 @@
                     style="@style/mainTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="eve"
+                    android:text="@string/eve"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -228,6 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
                 <LinearLayout
@@ -243,6 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
             </LinearLayout>
@@ -251,8 +263,8 @@
                 android:id="@+id/temp_night"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -264,7 +276,8 @@
                     style="@style/mainTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="night"
+                    android:text="@string/night"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -273,6 +286,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
                 <LinearLayout
@@ -288,6 +302,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="16sp"
                     tools:text="10\u00B0" />
 
             </LinearLayout>
@@ -301,7 +316,7 @@
             android:layout_height="1dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@color/divider_color"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/temp"/>
@@ -310,8 +325,8 @@
             android:id="@+id/humiduty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@id/second_divider"
             tools:layout_editor_absoluteX="32dp">
             <LinearLayout
@@ -324,25 +339,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/humidity"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_humidity_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="56%"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/vertical_divider_one"
-                style="@style/dividerStyle"
-                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/divider_color"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -360,17 +380,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pressure"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_pressure_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="1020hPa"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
@@ -391,8 +415,8 @@
             android:id="@+id/windSpeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@id/third_divider"
             tools:layout_editor_absoluteX="32dp">
             <LinearLayout
@@ -405,25 +429,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wind_speed"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_wind_speed_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="3.6 m/s"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/vertical_divider_two"
-                style="@style/dividerStyle"
-                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/divider_color"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -441,11 +470,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wind_dir"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_wind_dir_fragment"
@@ -472,8 +504,8 @@
             android:id="@+id/sunTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@id/forth_divider"
             tools:layout_editor_absoluteX="32dp">
             <LinearLayout
@@ -486,24 +518,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sunrise"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_sunrise_time_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="05:00"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/vertical_divider_three"
-                style="@style/dividerStyle"
-                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/divider_color"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -520,17 +557,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sunset"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_sunset_time_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="18:00"
+                        android:textSize="18sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>

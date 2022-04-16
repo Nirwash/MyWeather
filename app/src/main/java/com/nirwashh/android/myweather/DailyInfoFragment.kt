@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.transition.TransitionInflater
 import com.nirwashh.android.myweather.business.model.DailyWeatherModel
 import com.nirwashh.android.myweather.view.*
 import kotlinx.android.synthetic.main.fragment_day_info.*
@@ -13,6 +14,14 @@ import kotlinx.android.synthetic.main.fragment_day_info.*
 class DailyInfoFragment : DailyBaseFragment<DailyWeatherModel>() {
 
     private lateinit var viewContext: Context
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.slide_right)
+        enterTransition = inflater.inflateTransition(R.transition.slide_out_right)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,9 +37,9 @@ class DailyInfoFragment : DailyBaseFragment<DailyWeatherModel>() {
         btn_back.setOnClickListener {
             fm.popBackStack()
         }
-
-        updateView()
         viewContext = view.context
+        updateView()
+
     }
 
 

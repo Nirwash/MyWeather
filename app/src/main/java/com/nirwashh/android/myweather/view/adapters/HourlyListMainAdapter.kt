@@ -18,7 +18,8 @@ class HourlyListMainAdapter :
     com.nirwashh.android.myweather.view.adapters.BaseAdapter<HourlyWeatherModel>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_hourly_main, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_hourly_main, parent, false)
         return HourlyViewHolder(view)
     }
 
@@ -26,24 +27,36 @@ class HourlyListMainAdapter :
 
         @BindView(R.id.item_tv_hourly_time)
         lateinit var time: MaterialTextView
+
         @BindView(R.id.item_tv_hourly_temp)
         lateinit var temperature: MaterialTextView
+
         @BindView(R.id.item_tv_hourly_pop)
         lateinit var popRate: MaterialTextView
+
         @BindView(R.id.item_ic_hourly_weather_condition)
         lateinit var icon: ImageView
+
         init {
             ButterKnife.bind(this, itemView)
         }
 
         override fun bindView(position: Int) {
             mData[position].apply {
-                    time.text = dt.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
-                        temperature.text = StringBuilder().append(temp.toDegree()).append("\u00b0").toString()
+                time.text = dt.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
+                temperature.text =
+                    StringBuilder().append(temp.toDegree()).append("\u00b0").toString()
+                if (pop < 0.01) {
+                    popRate.visibility = View.INVISIBLE
+                } else {
+                    popRate.visibility = View.VISIBLE
                     popRate.text = pop.toPercentString("%")
-                    icon.setImageResource(weather[0].icon.provideIcon())}
+                }
 
+                icon.setImageResource(weather[0].icon.provideIcon())
             }
+
+        }
 
 
     }

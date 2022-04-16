@@ -10,6 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_menu_mainAct"
             style="@style/iconButton"
@@ -163,6 +178,7 @@
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:text="@string/avg"
+                    android:layout_gravity="center"
                     android:textSize="12sp" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -365,7 +381,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="8dp"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -378,7 +394,7 @@
 
             <LinearLayout
                 style="@style/dividerStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_width="match_parent"/>
