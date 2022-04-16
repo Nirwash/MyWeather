@@ -40,6 +40,16 @@ fun String.provideIcon() = when (this) {
     else -> R.drawable.ic_error
 
 }
+fun String.provideImage() = when (this) {
+    "01n", "01d" -> R.drawable.image_sun
+    "02n", "02d" -> R.drawable.image_sun_cloud
+    "09n", "09d" -> R.drawable.image_little_rain
+    "10n", "10d" -> R.drawable.image_rain
+    "11n", "11d" -> R.drawable.image_lightning
+    "13n", "13d" -> R.drawable.image_snow
+    else -> R.drawable.image_cloud
+
+}
 
 fun TextInputEditText.createObservable(): Flowable<String> {
     return Flowable.create({

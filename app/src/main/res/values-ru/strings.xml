@@ -16,4 +16,13 @@
     <string name="km_h">км/ч</string>
     <string name="mmhg">мм.рт.ст</string>
     <string name="hpa">гПа</string>
+    <string name="feels_like">Чувствуется как</string>
+    <string name="morn">утр</string>
+    <string name="day">день</string>
+    <string name="eve">веч</string>
+    <string name="night">ночь</string>
+    <string name="humidity">Влажность</string>
+    <string name="wind_dir">Направление ветра</string>
+    <string name="sunrise">Восход</string>
+    <string name="sunset">Закат</string>
 </resources>

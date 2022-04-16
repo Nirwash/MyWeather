@@ -22,5 +22,16 @@
     <string name="km_h">km/h</string>
     <string name="mmhg">mmHg</string>
     <string name="hpa">hPa</string>
+    <string name="feels_like">Feels like</string>
+    <string name="morn">morn</string>
+    <string name="day">day</string>
+    <string name="eve">eve</string>
+    <string name="night">night</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_dir">Wind direction</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="degree_symbol" translatable="false">%1$s \u00B0</string>
+
 
 </resources>

@@ -23,7 +23,7 @@ class MainRepository(api: ApiProvider) : BaseRepository<MainRepository.ServerRes
     fun reloadData(lat: String, lon: String) {
         Observable.zip(
             api.provideWeatherApi().getWeatherForecast(lat, lon, lang = defLanguage),
-            api.provideGeoCodeApi().getCityByCoord(lat, lon).map {
+            api.provideGeoCodeApi().getCityByCord(lat, lon).map {
                 it.asSequence()
                     .map { model -> model.name }
                     .toList()

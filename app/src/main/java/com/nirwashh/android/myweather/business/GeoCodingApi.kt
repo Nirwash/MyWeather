@@ -10,15 +10,15 @@ interface GeoCodingApi {
     @GET("geo/1.0/direct?")
     fun getCityByName(
         @Query ("q") name: String,
-        @Query ("limit") limit: String = "10",
+        @Query ("limit") limit: String = "5",
         @Query ("appid") appid: String = "00cdc0ee3924708d349131ddb0350450"
     ) : Observable<List<GeoCodeModel>>
 
     @GET("geo/1.0/reverse?")
-    fun getCityByCoord(
+    fun getCityByCord(
         @Query("lat") lat: String,
         @Query("lon") lon: String,
-        @Query("limit") limit: String = "10",
+        @Query("limit") limit: String = "5",
         @Query("appid") id: String = "00cdc0ee3924708d349131ddb0350450"
     ) : Observable<List<GeoCodeModel>>
 

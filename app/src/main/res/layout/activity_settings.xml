@@ -182,14 +182,14 @@
                 android:layout_width="88dp"
                 android:layout_height="48dp"
                 android:tag="C"
-                android:text="@string/pressure_mu_mmHg" />
+                android:text="@string/mmhg" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_pressure_hPa"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="88dp"
                 android:layout_height="48dp"
-                android:text="@string/pressure_mu_hpa" />
+                android:text="@string/hpa" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
     </FrameLayout>

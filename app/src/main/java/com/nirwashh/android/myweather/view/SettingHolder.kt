@@ -16,13 +16,13 @@ object SettingsHolder {
     private lateinit var preferences: SharedPreferences
     var temp = Setting.TEMP_CELSIUS
     var windSpeed = Setting.WIND_SPEED_MS
-    var pressure = Setting.PRESSURE_HPA
+    var pressure = Setting.PRESSURE_MMHG
 
     fun onCreate(pref: SharedPreferences) {
         preferences = pref
         temp = getSetting(preferences.getInt(TEMP, C))
         windSpeed = getSetting(preferences.getInt(WIND_SPEED, MS))
-        pressure = getSetting(preferences.getInt(PRESSURE, HPA))
+        pressure = getSetting(preferences.getInt(PRESSURE, MM_HG))
     }
 
     fun onDestroy() {
@@ -55,7 +55,7 @@ object SettingsHolder {
             override fun getValue(initValue: Double) = valueToString { initValue - 273.15 }
         },
         TEMP_FAHRENHEIT(R.id.btn_degreeF, R.string.f, F) {
-            override fun getValue(initValue: Double) = valueToString { (initValue - 273.15) * (9/5) * 32 }
+            override fun getValue(initValue: Double) = valueToString { (initValue - 273.15) * (9/5) + 32 }
         },
         WIND_SPEED_MS(R.id.btn_windSpeed_m_s, R.string.wind_speed_mu_ms, MS) {
             override fun getValue(initValue: Double) = valueToString { initValue }

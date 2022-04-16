@@ -16,7 +16,6 @@
     </style>
 
     <style name="mainTextViewStyle">
-        <item name="fontFamily">sans-serif</item>
     </style>
 
     <style name="dividerStyle">

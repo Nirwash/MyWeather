@@ -17,6 +17,7 @@ class MenuPresenter : BasePresenter<MenuView>() {
                 viewState.fillFavoriteList(it.data)
             } else {
                 Log.d("123321", "enable: CURRENT ${it.data}")
+                viewState.fillFavoriteList(it.data)
             }
         }
     }

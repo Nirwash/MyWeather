@@ -6,6 +6,7 @@ import android.content.Intent
 import android.location.Location
 
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.LocationCallback
@@ -43,7 +44,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(b.root)
         initViews()
         if (!intent.hasExtra(COORDINATES)) {
-            geoService.requestLocationUpdates(locationRequest, geoCallback, mainLooper)
+            geoService.requestLocationUpdates(locationRequest, geoCallback, Looper.getMainLooper())
         } else {
             val coord = intent.extras!!.getBundle(COORDINATES)!!
             val loc = Location("")
@@ -86,20 +87,20 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private fun initViews() {
         b.apply {
-            tvCityMainAct.text = "Rostov-od-Don"
-            tvDateMainAct.text = "31 Oktober"
+            tvCityMainAct.text = "Earth"
+            tvDateMainAct.text = "01 January"
             icWeatherConditionMain.setImageResource(R.drawable.ic_sun)
             tvWeatherConditionDescriptionMain.text = "Clear sky"
-            tvTempMainAct.text = "25\u00B0"
-            tvMinValueMainAct.text = "19"
-            tvMaxValueMainAct.text = "28"
-            tvAvgValueMainAct.text = "21"
-            imgWeatherMainAct.setImageResource(R.mipmap.cloud3x)
-            tvPressureMuMain.text = "1,5 hPa"
-            tvHumidityMuMain.text = "55%"
-            tvWindSpeedMuMain.text = "4 m/s"
-            tvSunriseTimeMain.text = "6:45"
-            tvSunsetTimeMain.text = "17:45"
+            tvTempMainAct.text = "00\u00B0"
+            tvMinValueMainAct.text = "00"
+            tvMaxValueMainAct.text = "00"
+            tvAvgValueMainAct.text = "00"
+            imgWeatherMainAct.setImageResource(R.drawable.image_sun_cloud)
+            tvPressureMuMain.text = "00 hPa"
+            tvHumidityMuMain.text = "00%"
+            tvWindSpeedMuMain.text = "00 m/s"
+            tvSunriseTimeMain.text = "00:00"
+            tvSunsetTimeMain.text = "00:00"
         }
     }
 
@@ -132,7 +133,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 val windSpeedSet = SettingsHolder.windSpeed
                 b.tvWindSpeedMuMain.text = getString(pressureSet.measureUnitStringRes, pressureSet.getValue(current.wind_speed))
 
-                imgWeatherMainAct.setImageResource(R.mipmap.cloud3x)
+                imgWeatherMainAct.setImageResource(current.weather[0].icon.provideImage())
                 tvPressureMuMain.text =
                     StringBuilder().append(current.pressure.toString()).append(" hPa").toString()
                 tvHumidityMuMain.text =
@@ -177,7 +178,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val geoCallback = object : LocationCallback() {
         override fun onLocationResult(geo: LocationResult) {
-            Log.d(TAG, "onLocationResult: ${geo.locations.size}")
             for (location in geo.locations) {
                 mLocation = location
                 mainPresenter.refresh(mLocation.latitude.toString(), mLocation.longitude.toString())

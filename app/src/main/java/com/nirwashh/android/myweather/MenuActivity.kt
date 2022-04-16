@@ -23,15 +23,15 @@ import java.util.concurrent.TimeUnit
 class MenuActivity : MvpAppCompatActivity(), MenuView {
     lateinit var b: ActivityMenuBinding
 
-    //private val presenter by moxyPresenter { MenuPresenter() }
+    private val presenter by moxyPresenter { MenuPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(b.root)
 
-        //presenter.enable()
-        //presenter.getFavoriteList()
+        presenter.enable()
+        presenter.getFavoriteList()
 
         initCitiList(predictions)
         initCitiList(favorites)
@@ -41,7 +41,7 @@ class MenuActivity : MvpAppCompatActivity(), MenuView {
             .debounce(700, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-            //if (!it.isNullOrEmpty()) presenter.searchFor(it)
+            if (!it.isNullOrEmpty()) presenter.searchFor(it)
             }
 
     }
@@ -69,11 +69,11 @@ class MenuActivity : MvpAppCompatActivity(), MenuView {
 
     private val searchItemClickListener = object : CityListAdapter.SearchItemClickListener {
         override fun removeFromFavorite(item: GeoCodeModel) {
-            //presenter.removeLocation(item)
+            presenter.removeLocation(item)
         }
 
         override fun addToFavorite(item: GeoCodeModel) {
-            //presenter.saveLocation(item)
+            presenter.saveLocation(item)
         }
 
         override fun showWeatherIn(item: GeoCodeModel) {
