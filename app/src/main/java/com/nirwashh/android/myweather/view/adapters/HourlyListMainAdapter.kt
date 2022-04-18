@@ -46,12 +46,8 @@ class HourlyListMainAdapter :
                 time.text = dt.toDateFormatOf(HOUR_DOUBLE_DOT_MINUTE)
                 temperature.text =
                     StringBuilder().append(temp.toDegree()).append("\u00b0").toString()
-                if (pop < 0.01) {
-                    popRate.visibility = View.INVISIBLE
-                } else {
-                    popRate.visibility = View.VISIBLE
+
                     popRate.text = pop.toPercentString("%")
-                }
 
                 icon.setImageResource(weather[0].icon.provideIcon())
             }

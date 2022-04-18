@@ -2,18 +2,23 @@ package com.nirwashh.android.myweather
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.IntentSender
 import android.graphics.Point
 
 import android.location.Location
+import android.location.LocationRequest
 
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.nirwashh.android.myweather.business.model.DailyWeatherModel
 import com.nirwashh.android.myweather.business.model.HourlyWeatherModel
 import com.nirwashh.android.myweather.business.model.WeatherDataModel
@@ -25,6 +30,7 @@ import com.nirwashh.android.myweather.view.adapters.HourlyListMainAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import java.lang.Exception
 import java.lang.StringBuilder
 import kotlin.math.roundToInt
 
@@ -35,9 +41,16 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     lateinit var b: ActivityMainBinding
 
     private val mainPresenter by moxyPresenter { MainPresenter() }
-
+    private val tokenSource: CancellationTokenSource = CancellationTokenSource()
     private val geoService by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private val locationRequest by lazy { initLocationRequest() }
+    private val geoCallback = object : LocationCallback() {
+        override fun onLocationResult(geo: LocationResult) {
+            Log.d(TAG, "onLocationResult: callback ${geo.locations[0]}")
+            mLocation = geo.locations[0]
+            mainPresenter.refresh(mLocation.latitude.toString(), mLocation.longitude.toString())
+        }
+    }
     private lateinit var mLocation: Location
 
     @SuppressLint("MissingPermission")
@@ -57,7 +70,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             .commit()
 
         if (!intent.hasExtra(COORDINATES)) {
-            geoService.requestLocationUpdates(locationRequest, geoCallback, Looper.getMainLooper())
+            checkGeoAvailability()
+            Log.d(TAG, "onCreate: ")
+            getGeo()
         } else {
             val coord = intent.extras!!.getBundle(COORDINATES)!!
             val loc = Location("")
@@ -186,25 +201,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private fun initLocationRequest(): com.google.android.gms.location.LocationRequest {
         val request = com.google.android.gms.location.LocationRequest.create()
         return request.apply {
-            interval = 10000
+            interval = 1000000
             fastestInterval = 5000
             priority = com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 
         }
     }
 
-    private val geoCallback = object : LocationCallback() {
-        override fun onLocationResult(geo: LocationResult) {
-            for (location in geo.locations) {
-                mLocation = location
-                mainPresenter.refresh(mLocation.latitude.toString(), mLocation.longitude.toString())
-                Log.d(
-                    TAG,
-                    "onLocationResult: lat: ${location.latitude} ; lon: ${location.longitude}"
-                )
-            }
-        }
-    }
+
 
     private fun initBottomSheets() {
         bottom_sheets_main.isNestedScrollingEnabled = true
@@ -224,5 +228,38 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
     }
+
+    @SuppressLint("MissingPermission")
+    private fun getGeo() {
+        geoService
+            .getCurrentLocation(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY, tokenSource.token)
+            .addOnSuccessListener {
+                Log.d(TAG, "getGeo: ")
+                if (it != null) {
+                    mLocation = it
+                    mainPresenter.refresh(mLocation.latitude.toString(), mLocation.longitude.toString())
+                } else {
+                    displayError(Exception("Geodata is not available"))
+                }
+                Log.d(TAG, "requestGeo: $it")
+            }
+    }
+
+    private fun checkGeoAvailability() {
+        Log.d(TAG, "checkGeoAvailability: ")
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(this)
+        val task = client.checkLocationSettings(builder.build())
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                try {
+                    exception.startResolutionForResult(this, 100)
+                } catch (sendEx: IntentSender.SendIntentException) {
+
+                }
+            }
+        }
+    }
+
 
 }
